@@ -17,23 +17,19 @@ function App() {
 
   const addExpenseHandler = expense => {
     // setExpenses([expense, ...expenses]);
-    setExpenses(prevExpenses => {
-      return [expense, ...prevExpenses];
-    });
+    //correct
+    setExpenses(prevExpenses => [expense, ...prevExpenses]);
   }
 
   const deleteExpenseHandler = (id) => {
-    let newArray = expenses;
-    const neededIndex = expenses.findIndex(obj => obj.id === id);
-    if (neededIndex > -1) newArray.splice(neededIndex, 1);
     setExpenses(prevExpenses => {
-        return newArray;
+      //correct
+      return prevExpenses.filter(item => item.id !== id )    
     });
-    // issue: expenses item is being deletes 
-    // however it does not update on the page
   } 
+  //re-render
+  console.log(expenses);
 
-  // this is JSX ->
   return (
     <div className="App">
       <h3>List of Expenses</h3>
